@@ -22,6 +22,13 @@ class CatsApi::V1::Client
     )
   end
 
+  def find_cat_image_by_id(id)
+    request(
+      http_method: :get,
+      endpoint: id.to_s
+    )
+  end
+
   private
 
   def client
