@@ -6,6 +6,7 @@ class CatsApi::V1::Client
   BASE_URL = 'https://api.thecatapi.com/v1/images'
   API_KEY = Rails.application.credentials.cats_api_key
 
+  # Get random cat images
   def random_cat_image(num = '', **params)
     request(
       http_method: :get,
@@ -14,6 +15,7 @@ class CatsApi::V1::Client
     )
   end
 
+  # Find a cat using unique ID
   def find_cat_image_by_id(id)
     request(
       http_method: :get,
