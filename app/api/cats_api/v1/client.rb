@@ -6,6 +6,13 @@ class CatsApi::V1::Client
   BASE_URL = 'https://api.thecatapi.com/v1/images'
   API_KEY = Rails.application.credentials.cats_api_key
 
+  def random_cat_image
+    request(
+      http_method: :get,
+      endpoint: 'search'
+    )
+  end
+
   private
 
   def client
