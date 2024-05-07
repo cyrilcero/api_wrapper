@@ -13,12 +13,11 @@ class CatsApi::V1::Client
     )
   end
 
-  def multiple_cat_images(num = 10, **params)
-    params[:limit] = num unless params.key?(:limit)
+  def multiple_cat_images(num = '')
     request(
       http_method: :get,
       endpoint: 'search',
-      params: { limit: num, **params }
+      params: { limit: num.to_int }
     )
   end
 
@@ -40,7 +39,7 @@ class CatsApi::V1::Client
         }
       }
       Faraday.new(url: BASE_URL, **options) do |config|
-        config.request :authorization, 'x-api-key', API_KEY
+        config.headers['x-api-key'] = API_KEY # add API key to headers
         config.request :json
         config.response :json, parser_options: { symbolize_names: true }
         config.response :raise_error
