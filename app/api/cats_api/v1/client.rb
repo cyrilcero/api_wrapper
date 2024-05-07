@@ -13,6 +13,15 @@ class CatsApi::V1::Client
     )
   end
 
+  def multiple_cat_images(num = 10, **params)
+    params[:limit] = num unless params.key?(:limit)
+    request(
+      http_method: :get,
+      endpoint: 'search',
+      params: { limit: num, **params }
+    )
+  end
+
   private
 
   def client
