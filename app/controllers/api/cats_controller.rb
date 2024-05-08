@@ -4,8 +4,7 @@ class Api::CatsController < ApplicationController
   def random_cat_image
     response = client.random_cat_image(params[:limit].to_i)
     if response[:status] == 200
-      @cat_images = response[:body]
-      render json: @cat_images
+      render json: response[:body]
     else
       render json: { error: 'Failed to fetch cat images' }, status: :internal_server_error
     end
@@ -14,11 +13,10 @@ class Api::CatsController < ApplicationController
   def find_cat_image_by_id
     response = client.find_cat_image_by_id(params[:id])
 
-    if response[:status] == 200
-      @cat_image = response[:body]
-      render json: @cat_image
+    if response.nil? || response[:status] != 200
+      render json: { error: 'Failed to fetch cat image' }, status: :internal_server_error
     else
-      render json: { error: 'Failed to fetch cat image' }, status: :not_found
+      render json: response[:body]
     end
   end
 
