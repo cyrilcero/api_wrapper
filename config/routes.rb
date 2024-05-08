@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get '/cats/random', to: 'cats#random_cat_image'
+    get '/cats/random/:num', to: 'cats#random_cat_image'
     get '/cats/:id', to: 'cats#find_cat_image_by_id'
   end
   # Defines the root path route ("/")

@@ -2,7 +2,7 @@ class Api::CatsController < ApplicationController
   before_action :client
 
   def random_cat_image
-    response = client.random_cat_image(params[:limit].to_i)
+    response = client.random_cat_image(params[:num].to_i.nonzero?)
     if response[:status] == 200
       render json: response[:body]
     else
